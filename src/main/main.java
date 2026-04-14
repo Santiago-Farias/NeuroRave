@@ -12,17 +12,18 @@ public class main {
         Scanner scanner = new Scanner(System.in);
         
         do {
-            System.out.println("=== NEURORAVE v0.1 ===" +
-                "\n1. Agregar Track" +
-                "\n2. Ver playlist" +
-                "\n3. Reproducir playlist completa" +
-                "\n0. Salir");
+            System.out.println("=== NEURORAVE v0.1 ===");
+            System.out.println("1. Add track");
+            System.out.println("2. Show playlist");
+            System.out.println("3. Play the playlist");
+            System.out.println("4. Play a specific track");
+            System.out.println("0. Exit");
             
-            System.out.print("Ingrese una opcion: ");
+            System.out.print("Enter your choice: ");
             opcion = scanner.nextInt();
             
             if (opcion != 0) {
-                System.out.println("\nProyecto en desarrollo..\n");
+                System.out.println("\nWork in progress..\n");
             }
             
         } while (opcion != 0);

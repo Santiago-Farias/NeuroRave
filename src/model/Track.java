@@ -18,7 +18,7 @@ public class Track {
     
     // Metodos principales
     public void reproducir() {
-        System.out.println("> Reproduciendo " + getArtist() + " - " + getName() + " [" + getMinutesDuration() + "]");
+        System.out.println("> Reproduciendo: " + getArtist() + " - " + getName() + " [" + getMinutesDuration() + "]");
     }
     
     public String getMinutesDuration() {

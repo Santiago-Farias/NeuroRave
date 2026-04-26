@@ -14,6 +14,7 @@ public class main {
         
         int mainOption = 100;
         int genereOption = 100;
+        int songOption = 10000;
         String artistTemp = "";
         String nameTemp = "";
         String genereTemp = "";
@@ -38,10 +39,10 @@ public class main {
             
             if (mainOption == 1) { // if option is ADD TRACK
                 System.out.println("");
-                System.out.println("Enter the artist: ");
+                System.out.print("Enter the artist: ");
                 artistTemp = scanner.nextLine();
                 System.out.println("");
-                System.out.println("Enter track name: ");
+                System.out.print("Enter track name: ");
                 nameTemp = scanner.nextLine();
                 System.out.println("");
                 
@@ -50,14 +51,14 @@ public class main {
                     System.out.println("1. Breakcore");
                     System.out.println("2. Dubstep");
                     System.out.println("3. Vocaloid");
-                    System.out.println("Select the genere by entering a number: ");
+                    System.out.print("Select the genere by entering a number: ");
                     genereOption = scanner.nextInt();
-                } while (genereOption < 1 && genereOption > 3);
+                } while (genereOption < 1 || genereOption > 3);
                 System.out.println("");
-                System.out.println("Enter track bpm: ");
+                System.out.print("Enter track bpm: ");
                 bpmTemp = scanner.nextInt();
                 System.out.println("");
-                System.out.println("Enter track duration in seconds: ");
+                System.out.print("Enter track duration in seconds: ");
                 secDurationTemp = scanner.nextInt();
                 
                 // ideally, have a array with generes and validation in input
@@ -92,9 +93,45 @@ public class main {
                     System.out.println("");
                     System.out.println("The playlist is empty!");
                 } else {
+                    System.out.println("");
                     System.out.println("Current playlist:");
                     for (int i = 0; i < playList.size(); i++) {
                         System.out.println(playList.get(i).getArtist() + " - " + playList.get(i).getName());
+                    }
+                }
+            }
+            
+            if (mainOption == 3) { // Play the playlist logic
+                if (playList.isEmpty()) {
+                    System.out.println("");
+                    System.out.println("The playlist is empty!");
+                } else {
+                    System.out.println("");
+                    System.out.println("Current playlist:");
+                    for (int i = 0; i < playList.size(); i++) {
+                        playList.get(i).reproducir();
+                    }
+                }
+            }
+            
+            if (mainOption == 4) { // Play specific song logic
+                if (playList.isEmpty()) {
+                    System.out.println("");
+                    System.out.println("The playlist is empty!");
+                } else {
+                    System.out.println("");
+                    System.out.println("Current song in playlist: ");
+                    for (int i = 0; i < playList.size(); i++) {
+                        System.out.println("[" + (i+1) + "] " + playList.get(i).getArtist() + " - " + playList.get(i).getName());
+                    }
+                    do {
+                    System.out.print("Choose a song: ");
+                    songOption = scanner.nextInt();
+                    } while (songOption < 1 || songOption > (playList.size()));
+                }
+                for (int i = 1; i <= playList.size(); i++) {
+                    if (i == songOption) {
+                        playList.get(songOption).reproducir();                    
                     }
                 }
             }

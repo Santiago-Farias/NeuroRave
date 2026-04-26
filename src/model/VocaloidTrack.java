@@ -5,8 +5,8 @@ public class VocaloidTrack extends Track{
     
     private int voiceTone = 100;
    
-    public VocaloidTrack(String artistTrack, String nameTrack, int bpmTrack, int secDuracionTrack) {
-        super(artistTrack, nameTrack, nameTrack, bpmTrack, secDuracionTrack);
+    public VocaloidTrack(String artistTrack, String nameTrack, String genereTrack, int bpmTrack, int secDuracionTrack) {
+        super(artistTrack, nameTrack, genereTrack, bpmTrack, secDuracionTrack);
     }
     
     @Override

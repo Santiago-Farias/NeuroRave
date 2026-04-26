@@ -2,7 +2,10 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import model.BreakcoreTrack;
+import model.DubstepTrack;
 import model.Track;
+import model.VocaloidTrack;
 
 public class main {
 
@@ -33,7 +36,7 @@ public class main {
             mainOption = scanner.nextInt();
             scanner.nextLine();
             
-            if (mainOption == 1) {
+            if (mainOption == 1) { // if option is ADD TRACK
                 System.out.println("");
                 System.out.println("Enter the artist: ");
                 artistTemp = scanner.nextLine();
@@ -58,13 +61,42 @@ public class main {
                 secDurationTemp = scanner.nextInt();
                 
                 // ideally, have a array with generes and validation in input
-//                switch (genereOption) {
-//                    case 1 -> genereTemp = "Breakcore";
-//                    case 2 -> genereTemp = "Dubstep";
-//                    case 3 -> genereTemp = "Vocaloid";
-//                    default -> {
-//                    }
-//                }
+                switch (genereOption) {
+                    case 1:
+                        genereTemp = "Breakcore";
+                        BreakcoreTrack breakcore = new BreakcoreTrack(artistTemp, nameTemp, genereTemp, bpmTemp, secDurationTemp);
+                        playList.add(breakcore);
+                        break;
+                    case 2:
+                        genereTemp = "Dubstep";
+                        DubstepTrack dubstep = new DubstepTrack(artistTemp, nameTemp, genereTemp, bpmTemp, secDurationTemp);
+                        playList.add(dubstep);
+                        break;
+                    case 3:
+                        genereTemp = "Vocaloid";
+                        VocaloidTrack vocaloid = new VocaloidTrack(artistTemp, nameTemp, genereTemp, bpmTemp, secDurationTemp);
+                        playList.add(vocaloid);
+                        break;
+                }
+                
+                System.out.println(genereTemp + " song added to playlist!");
+                artistTemp = "";
+                nameTemp = "";
+                genereTemp = "";
+                bpmTemp = 0;
+                secDurationTemp = 0;
+            }
+            
+            if (mainOption == 2) { // Show playlist logic
+                if (playList.isEmpty()) {
+                    System.out.println("");
+                    System.out.println("The playlist is empty!");
+                } else {
+                    System.out.println("Current playlist:");
+                    for (int i = 0; i < playList.size(); i++) {
+                        System.out.println(playList.get(i).getArtist() + " - " + playList.get(i).getName());
+                    }
+                }
             }
             
             if (mainOption != 0) {

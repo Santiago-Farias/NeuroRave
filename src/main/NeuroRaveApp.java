@@ -7,7 +7,7 @@ import model.DubstepTrack;
 import model.Track;
 import model.VocaloidTrack;
 
-public class main {
+public class NeuroRaveApp {
 
 
     public static void main(String[] args) {
@@ -129,11 +129,7 @@ public class main {
                     songOption = scanner.nextInt();
                     } while (songOption < 1 || songOption > (playList.size()));
                 }
-                for (int i = 1; i <= playList.size(); i++) {
-                    if (i == songOption) {
-                        playList.get(songOption).reproducir();                    
-                    }
-                }
+                playList.get(songOption).reproducir(); 
             }
             
             if (mainOption != 0) {
@@ -141,8 +137,6 @@ public class main {
             }
             
         } while (mainOption != 0);
-        
-        
         
     }
     

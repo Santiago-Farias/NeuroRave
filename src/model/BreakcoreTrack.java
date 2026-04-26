@@ -11,6 +11,6 @@ public class BreakcoreTrack extends Track {
     @Override
     public void reproducir() {
         super.reproducir();
-        System.out.println("Apllying glith intensity (" + glitchIntensity + "%)");
+        System.out.println("Applying glith intensity (" + glitchIntensity + "%)");
     }
 }

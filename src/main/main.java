@@ -31,6 +31,7 @@ public class main {
             
             System.out.print("Enter your choice: ");
             mainOption = scanner.nextInt();
+            scanner.nextLine();
             
             if (mainOption == 1) {
                 System.out.println("");
@@ -48,7 +49,7 @@ public class main {
                     System.out.println("3. Vocaloid");
                     System.out.println("Select the genere by entering a number: ");
                     genereOption = scanner.nextInt();
-                } while (genereOption >= 1 && genereOption <= 3);
+                } while (genereOption < 1 && genereOption > 3);
                 System.out.println("");
                 System.out.println("Enter track bpm: ");
                 bpmTemp = scanner.nextInt();
@@ -57,13 +58,13 @@ public class main {
                 secDurationTemp = scanner.nextInt();
                 
                 // ideally, have a array with generes and validation in input
-                switch (genereOption) {
-                    case 1 -> genereTemp = "Breakcore";
-                    case 2 -> genereTemp = "Dubstep";
-                    case 3 -> genereTemp = "Vocaloid";
-                    default -> {
-                    }
-                }
+//                switch (genereOption) {
+//                    case 1 -> genereTemp = "Breakcore";
+//                    case 2 -> genereTemp = "Dubstep";
+//                    case 3 -> genereTemp = "Vocaloid";
+//                    default -> {
+//                    }
+//                }
             }
             
             if (mainOption != 0) {

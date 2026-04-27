@@ -1,5 +1,6 @@
 package model;
 
+
 public class Track {
     private String artist = "";
     private String name = "";
@@ -18,7 +19,7 @@ public class Track {
     
     // Metodos principales
     public void reproducir() {
-        System.out.println("> Reproduciendo: " + getArtist() + " - " + getName() + " [" + getMinutesDuration() + "]");
+        System.out.println("> Reproduciendo: " + getArtist() + " - " + getName() + " [" + getMinutesDuration() + "] - " + getGenere() + " song - " + getBpm() + " BPM");
     }
     
     public String getMinutesDuration() {
@@ -26,6 +27,11 @@ public class Track {
         int segundos = secDuration % 60;
         
         return minutos + ":" + (segundos < 10 ? "0" : "") + segundos;
+    }
+    
+    @Override
+    public String toString() {
+        return getGenere() + "|" + getArtist() + "|" + getName() + "|" + getBpm() + "|" + getSecDuration();
     }
     
     // Getters

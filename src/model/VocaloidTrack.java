@@ -12,7 +12,7 @@ public class VocaloidTrack extends Track{
     @Override
     public void reproducir() {
         super.reproducir();
-        System.out.println("Vibing with " + voiceTone + " voice tone!");
+        System.out.println("Vocaloid vibes with " + voiceTone + "% perfect voice tone!");
     }
     
 }

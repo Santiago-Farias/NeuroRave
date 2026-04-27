@@ -1,9 +1,11 @@
 package main;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import model.BreakcoreTrack;
 import model.DubstepTrack;
+import model.PlaylistFileManager;
 import model.Track;
 import model.VocaloidTrack;
 
@@ -31,6 +33,8 @@ public class NeuroRaveApp {
             System.out.println("2. Show playlist");
             System.out.println("3. Play the playlist");
             System.out.println("4. Play a specific track");
+            System.out.println("5. Save playlist");
+            System.out.println("6. Load playlist");
             System.out.println("0. Exit");
             
             System.out.print("Enter your choice: ");
@@ -129,10 +133,28 @@ public class NeuroRaveApp {
                     songOption = scanner.nextInt();
                     } while (songOption < 1 || songOption > (playList.size()));
                 }
-                playList.get(songOption).reproducir(); 
+                playList.get(songOption-1).reproducir();
             }
             
-            if (mainOption != 0) {
+            if (mainOption == 5) { // Save playlist logic
+                if (playList.isEmpty()) {
+                    System.out.println("");
+                    System.out.println("Empty playlist! You must add songs first.");
+                    System.out.println("");
+                } else {
+                    PlaylistFileManager.savePlaylist(playList);
+                }
+            }
+            
+            if (mainOption == 6) {// Load playlist logic
+                
+                try {
+                    PlaylistFileManager.loadPlayList();   
+                } catch (IOException e) {
+                }
+            }
+            
+            if (mainOption > 6) {
                 System.out.println("\nWork in progress..\n");
             }
             

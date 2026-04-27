@@ -11,7 +11,7 @@ public class DubstepTrack extends Track {
     @Override
     public void reproducir() {
         super.reproducir();
-        System.out.println(transformersNoises + " transforms made some noise!");
+        System.out.println("¡WUB WUB! " + transformersNoises + " monster transformer sounds incoming!");
     }
     
 }

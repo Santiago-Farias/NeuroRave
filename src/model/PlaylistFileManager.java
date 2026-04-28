@@ -25,22 +25,37 @@ public class PlaylistFileManager {
         }
     }
     
-    public static void loadPlayList() throws IOException {
-        ArrayList<Track> playlistEmpty;
-        try {
+    public static ArrayList<Track> loadPlaylist() throws IOException {
+        ArrayList<Track> playlistEmpty = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader("playlist.txt"))){
             String brString;
-            FileReader playlistFileReader = new FileReader("playlist.txt");
-            BufferedReader br = new BufferedReader(playlistFileReader);
             while ((brString = br.readLine()) != null) {
                 // Add the load tracks to objects logic
-                System.out.println(brString);
                 String[] savedTextData = brString.split("\\|");
-                System.out.println("playlistEmpty: "  + brString + "\n"+savedTextData[0]);
+                
+                switch (savedTextData[0]) {
+                    case "Breakcore":
+                        BreakcoreTrack breakcore = new BreakcoreTrack(savedTextData[1], savedTextData[2], savedTextData[0], Integer.parseInt(savedTextData[3]), Integer.parseInt(savedTextData[4]));
+                        playlistEmpty.add(breakcore);
+                        break;
+                    case "Dubstep":
+                        DubstepTrack dubstep = new DubstepTrack(savedTextData[1], savedTextData[2], savedTextData[0], Integer.parseInt(savedTextData[3]), Integer.parseInt(savedTextData[4]));
+                        playlistEmpty.add(dubstep);
+                        break;
+                    case "Vocaloid":
+                        VocaloidTrack vocaloid = new VocaloidTrack(savedTextData[1], savedTextData[2], savedTextData[0], Integer.parseInt(savedTextData[3]), Integer.parseInt(savedTextData[4]));
+                        playlistEmpty.add(vocaloid);
+                        break;
+                    default:
+                        System.out.println("Corrupt genere founded!");
+                        break;
+                }
             }
-            System.out.println();
+            System.out.println("\nPlaylist loaded successfully!\n");
         } catch (FileNotFoundException e) {
             System.out.println("File not found!\nMake sure you have saved your playlist first, error: " + e);
         }
+        return playlistEmpty;
     }
     
 }

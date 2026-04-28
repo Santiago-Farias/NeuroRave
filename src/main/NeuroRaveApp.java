@@ -84,7 +84,7 @@ public class NeuroRaveApp {
                         break;
                 }
                 
-                System.out.println(genereTemp + " song added to playlist!");
+                System.out.println("\n" + genereTemp + " song added to playlist!\n");
                 artistTemp = "";
                 nameTemp = "";
                 genereTemp = "";
@@ -96,12 +96,14 @@ public class NeuroRaveApp {
                 if (playList.isEmpty()) {
                     System.out.println("");
                     System.out.println("The playlist is empty!");
+                    System.out.println("");
                 } else {
                     System.out.println("");
                     System.out.println("Current playlist:");
                     for (int i = 0; i < playList.size(); i++) {
                         System.out.println(playList.get(i).getArtist() + " - " + playList.get(i).getName());
                     }
+                    System.out.println("");
                 }
             }
             
@@ -109,6 +111,7 @@ public class NeuroRaveApp {
                 if (playList.isEmpty()) {
                     System.out.println("");
                     System.out.println("The playlist is empty!");
+                    System.out.println("");
                 } else {
                     System.out.println("");
                     System.out.println("Current playlist:");
@@ -138,9 +141,7 @@ public class NeuroRaveApp {
             
             if (mainOption == 5) { // Save playlist logic
                 if (playList.isEmpty()) {
-                    System.out.println("");
-                    System.out.println("Empty playlist! You must add songs first.");
-                    System.out.println("");
+                    System.out.println("\nEmpty playlist! You must add songs first.\n");
                 } else {
                     PlaylistFileManager.savePlaylist(playList);
                 }
@@ -149,7 +150,7 @@ public class NeuroRaveApp {
             if (mainOption == 6) {// Load playlist logic
                 
                 try {
-                    PlaylistFileManager.loadPlayList();   
+                    playList = PlaylistFileManager.loadPlaylist();
                 } catch (IOException e) {
                 }
             }

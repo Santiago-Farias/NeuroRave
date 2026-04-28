@@ -134,7 +134,7 @@ public class NeuroRaveApp {
                         System.out.println("[" + (i+1) + "] " + playList.get(i).getArtist() + " - " + playList.get(i).getName());
                     }
                     do {
-                    System.out.print("Choose a song: ");
+                    System.out.print("Select track number: ");
                     songOption = scanner.nextInt();
                     } while (songOption < 1 || songOption > (playList.size()));
                     playList.get(songOption-1).reproducir();
@@ -168,7 +168,7 @@ public class NeuroRaveApp {
                 }
             }
             
-            if (mainOption == 7) {
+            if (mainOption == 7) { // Remove song from playlist logic
                 if (playList.isEmpty()) {
                     System.out.println("");
                     System.out.println("The playlist is empty!\n");
@@ -179,11 +179,12 @@ public class NeuroRaveApp {
                         System.out.println("[" + (i+1) + "] " + playList.get(i).getArtist() + " - " + playList.get(i).getName());
                     }
                     do {
-                    System.out.print("Choose a song to remove: ");
+                    System.out.print("Select track number: ");
                     songOption = scanner.nextInt();
                     } while (songOption < 1 || songOption > (playList.size()));
+                    String removedTrackTemp = playList.get(songOption-1).getArtist() + " - " + playList.get(songOption-1).getName();
                     playList.remove(songOption-1);
-                    System.out.println("The (" + (songOption) + ") song was removed!");
+                    System.out.println("The (" + removedTrackTemp + ") song was removed!");
                 }
             }
             

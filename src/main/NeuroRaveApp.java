@@ -16,7 +16,6 @@ public class NeuroRaveApp {
         
         int mainOption = 100;
         int genereOption = 100;
-        int songOption = 10000;
         String replacePlaylistOption;
         String artistTemp = "";
         String nameTemp = "";
@@ -130,14 +129,9 @@ public class NeuroRaveApp {
                 } else {
                     System.out.println("");
                     System.out.println("Current songs in playlist: ");
-                    for (int i = 0; i < playList.size(); i++) {
-                        System.out.println("[" + (i+1) + "] " + playList.get(i).getArtist() + " - " + playList.get(i).getName());
-                    }
-                    do {
-                    System.out.print("Select track number: ");
-                    songOption = scanner.nextInt();
-                    } while (songOption < 1 || songOption > (playList.size()));
-                    playList.get(songOption-1).reproducir();
+                    showNumeredPlaylist(playList);
+                    int validSongOption = requestValidIndex(scanner, playList);
+                    playList.get(validSongOption-1).reproducir();
                 }
             }
             
@@ -175,15 +169,10 @@ public class NeuroRaveApp {
                 } else {
                     System.out.println("");
                     System.out.println("Current songs in playlist: ");
-                    for (int i = 0; i < playList.size(); i++) {
-                        System.out.println("[" + (i+1) + "] " + playList.get(i).getArtist() + " - " + playList.get(i).getName());
-                    }
-                    do {
-                    System.out.print("Select track number: ");
-                    songOption = scanner.nextInt();
-                    } while (songOption < 1 || songOption > (playList.size()));
-                    String removedTrackTemp = playList.get(songOption-1).getArtist() + " - " + playList.get(songOption-1).getName();
-                    playList.remove(songOption-1);
+                    showNumeredPlaylist(playList);
+                    int validSongOption = requestValidIndex(scanner, playList);
+                    String removedTrackTemp = playList.get(validSongOption-1).getArtist() + " - " + playList.get(validSongOption-1).getName();
+                    playList.remove(validSongOption-1);
                     System.out.println("The (" + removedTrackTemp + ") song was removed!");
                 }
             }
@@ -196,4 +185,20 @@ public class NeuroRaveApp {
         
     }
     
+    public static void showNumeredPlaylist(ArrayList<Track> playList) {
+        for (int i = 0; i < playList.size(); i++) {
+            System.out.println("[" + (i + 1) + "] " + playList.get(i).getArtist() + " - " + playList.get(i).getName());
+        }
+    }
+    
+    public static int requestValidIndex(Scanner scanner, ArrayList<Track> playList) { // this thing crash whene recive a character or other thing no integer
+        int songOption;
+        do {
+            System.out.print("Select track number: ");
+            songOption = scanner.nextInt();
+        } while (songOption < 1 || songOption > (playList.size()));
+        return songOption;
+    }
+    
+    // Add more validations, e.g.: numbers inputs with limitations
 }

@@ -17,6 +17,7 @@ public class NeuroRaveApp {
         int mainOption = 100;
         int genereOption = 100;
         int songOption = 10000;
+        String replacePlaylistOption;
         String artistTemp = "";
         String nameTemp = "";
         String genereTemp = "";
@@ -150,8 +151,19 @@ public class NeuroRaveApp {
             if (mainOption == 6) {// Load playlist logic
                 
                 try {
-                    playList = PlaylistFileManager.loadPlaylist();
+                    if (playList.isEmpty()) {
+                        playList = PlaylistFileManager.loadPlaylist();
+                    } else {
+                        do {
+                            System.out.print("The playlist has Tracks. Overwrite? (y/n): ");
+                            replacePlaylistOption = scanner.nextLine();
+                            if (replacePlaylistOption.equalsIgnoreCase("y")) {
+                                playList = PlaylistFileManager.loadPlaylist();
+                            }
+                        } while (!replacePlaylistOption.equalsIgnoreCase("y") && !replacePlaylistOption.equalsIgnoreCase("n"));
+                    }
                 } catch (IOException e) {
+                    System.out.println("Error loading playlist: " + e);
                 }
             }
             

@@ -47,7 +47,7 @@ public class PlaylistFileManager {
                         playlistEmpty.add(vocaloid);
                         break;
                     default:
-                        System.out.println("Corrupt genere founded!");
+                        System.out.println("Unknown track type in file: " + savedTextData[0]);
                         break;
                 }
             }

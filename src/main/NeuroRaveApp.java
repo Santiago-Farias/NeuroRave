@@ -36,6 +36,7 @@ public class NeuroRaveApp {
             System.out.println("4. Play a specific track");
             System.out.println("5. Save playlist");
             System.out.println("6. Load playlist");
+            System.out.println("7. Remove track");
             System.out.println("0. Exit");
             
             System.out.print("Enter your choice: ");
@@ -125,10 +126,10 @@ public class NeuroRaveApp {
             if (mainOption == 4) { // Play specific song logic
                 if (playList.isEmpty()) {
                     System.out.println("");
-                    System.out.println("The playlist is empty!");
+                    System.out.println("The playlist is empty!\n");
                 } else {
                     System.out.println("");
-                    System.out.println("Current song in playlist: ");
+                    System.out.println("Current songs in playlist: ");
                     for (int i = 0; i < playList.size(); i++) {
                         System.out.println("[" + (i+1) + "] " + playList.get(i).getArtist() + " - " + playList.get(i).getName());
                     }
@@ -136,8 +137,8 @@ public class NeuroRaveApp {
                     System.out.print("Choose a song: ");
                     songOption = scanner.nextInt();
                     } while (songOption < 1 || songOption > (playList.size()));
+                    playList.get(songOption-1).reproducir();
                 }
-                playList.get(songOption-1).reproducir();
             }
             
             if (mainOption == 5) { // Save playlist logic
@@ -167,10 +168,29 @@ public class NeuroRaveApp {
                 }
             }
             
-            if (mainOption > 6) {
-                System.out.println("\nWork in progress..\n");
+            if (mainOption == 7) {
+                if (playList.isEmpty()) {
+                    System.out.println("");
+                    System.out.println("The playlist is empty!\n");
+                } else {
+                    System.out.println("");
+                    System.out.println("Current songs in playlist: ");
+                    for (int i = 0; i < playList.size(); i++) {
+                        System.out.println("[" + (i+1) + "] " + playList.get(i).getArtist() + " - " + playList.get(i).getName());
+                    }
+                    do {
+                    System.out.print("Choose a song to remove: ");
+                    songOption = scanner.nextInt();
+                    } while (songOption < 1 || songOption > (playList.size()));
+                    playList.remove(songOption-1);
+                    System.out.println("The (" + (songOption) + ") song was removed!");
+                }
             }
             
+            if (mainOption > 7) {
+                System.out.println("\nWork in progress..\n");
+            }
+              
         } while (mainOption != 0);
         
     }

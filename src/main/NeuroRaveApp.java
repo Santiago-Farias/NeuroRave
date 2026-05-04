@@ -3,6 +3,7 @@ package main;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Random;
 import model.BreakcoreTrack;
 import model.DubstepTrack;
 import model.PlaylistFileManager;
@@ -20,12 +21,16 @@ public class NeuroRaveApp {
         String artistTemp = "";
         String nameTemp = "";
         String genereTemp = "";
+        String[] trackGeneres = {"Breakcore", "Dubstep", "Vocaloid"};
+        String[] byeMessages = {"Bye!", "Cya!", "See you next time!", "Take care!", "Later!"};
         int bpmTemp = 0;
         int secDurationTemp = 0;
         
         Scanner scanner = new Scanner(System.in);
         
         ArrayList<Track> playList = new ArrayList<>();
+        
+        Random rdm = new Random();
         
         do {
             System.out.println("=== NEURORAVE v0.1 ===");
@@ -38,9 +43,17 @@ public class NeuroRaveApp {
             System.out.println("7. Remove track");
             System.out.println("0. Exit");
             
-            System.out.print("Enter your choice: ");
-            mainOption = scanner.nextInt();
-            scanner.nextLine();
+            mainOption = requestValidIndex(scanner, 0, 7, "Enter your choice: ");
+            
+            //System.out.println(integerValidation("Ingrese el texto para parsear: "));
+            
+            if (mainOption == 0) {
+                System.out.println("");
+                for (int i = 0; i < 1; i++) {
+                    int randomByeMessageIndex = rdm.nextInt(byeMessages.length);
+                    System.out.println(byeMessages[randomByeMessageIndex]);
+                }
+            }
             
             if (mainOption == 1) { // if option is ADD TRACK
                 System.out.println("");
@@ -52,34 +65,29 @@ public class NeuroRaveApp {
                 System.out.println("");
                 
                 // Genere menu loop
-                do {
-                    System.out.println("1. Breakcore");
-                    System.out.println("2. Dubstep");
-                    System.out.println("3. Vocaloid");
-                    System.out.print("Select the genere by entering a number: ");
-                    genereOption = scanner.nextInt();
-                } while (genereOption < 1 || genereOption > 3);
+                for (int i = 0; i < trackGeneres.length; i++) {
+                    System.out.println("[" + (i+1) + "] " + trackGeneres[i]);
+                }
+                genereOption = requestValidIndex(scanner, 1, trackGeneres.length, "Select the genere by entering a number: ");
                 System.out.println("");
-                System.out.print("Enter track bpm: ");
-                bpmTemp = scanner.nextInt();
+                bpmTemp = requestValidIndex(scanner, 0, 300, "Enter track bpm: ");
                 System.out.println("");
-                System.out.print("Enter track duration in seconds: ");
-                secDurationTemp = scanner.nextInt();
+                secDurationTemp = requestValidIndex(scanner, 0, 50000, "Enter track duration in seconds: ");
                 
                 // ideally, have a array with generes and validation in input
                 switch (genereOption) {
                     case 1:
-                        genereTemp = "Breakcore";
+                        genereTemp = trackGeneres[0];
                         BreakcoreTrack breakcore = new BreakcoreTrack(artistTemp, nameTemp, genereTemp, bpmTemp, secDurationTemp);
                         playList.add(breakcore);
                         break;
                     case 2:
-                        genereTemp = "Dubstep";
+                        genereTemp = trackGeneres[1];
                         DubstepTrack dubstep = new DubstepTrack(artistTemp, nameTemp, genereTemp, bpmTemp, secDurationTemp);
                         playList.add(dubstep);
                         break;
                     case 3:
-                        genereTemp = "Vocaloid";
+                        genereTemp = trackGeneres[2];
                         VocaloidTrack vocaloid = new VocaloidTrack(artistTemp, nameTemp, genereTemp, bpmTemp, secDurationTemp);
                         playList.add(vocaloid);
                         break;
@@ -130,7 +138,7 @@ public class NeuroRaveApp {
                     System.out.println("");
                     System.out.println("Current songs in playlist: ");
                     showNumeredPlaylist(playList);
-                    int validSongOption = requestValidIndex(scanner, playList);
+                    int validSongOption = requestValidIndex(scanner, 1, playList.size(), "Enter your choice: ");
                     playList.get(validSongOption-1).reproducir();
                 }
             }
@@ -170,7 +178,7 @@ public class NeuroRaveApp {
                     System.out.println("");
                     System.out.println("Current songs in playlist: ");
                     showNumeredPlaylist(playList);
-                    int validSongOption = requestValidIndex(scanner, playList);
+                    int validSongOption = requestValidIndex(scanner, 1, playList.size(), "Enter your choice: ");
                     String removedTrackTemp = playList.get(validSongOption-1).getArtist() + " - " + playList.get(validSongOption-1).getName();
                     playList.remove(validSongOption-1);
                     System.out.println("The (" + removedTrackTemp + ") song was removed!");
@@ -191,13 +199,31 @@ public class NeuroRaveApp {
         }
     }
     
-    public static int requestValidIndex(Scanner scanner, ArrayList<Track> playList) { // this thing crash whene recive a character or other thing no integer
-        int songOption;
+    public static int requestValidIndex(Scanner scanner, int inputMin, int inputMax, String inputText) { // if the inputMin is 0, and user enter text, this thing will show a error with 0 too
+        String inputStringTemp;
+        int stringConveted = 0;
+        boolean stringConvertedFlag;
+        
         do {
-            System.out.print("Select track number: ");
-            songOption = scanner.nextInt();
-        } while (songOption < 1 || songOption > (playList.size()));
-        return songOption;
+            stringConvertedFlag = true;
+            System.out.print(inputText);
+            inputStringTemp = scanner.nextLine();
+        try {
+            stringConveted = Integer.parseInt(inputStringTemp);
+        } catch (NumberFormatException e) {
+            System.out.println("Error converting '" + inputStringTemp + "' to an integer: " + e);
+            stringConvertedFlag = false;
+        } 
+        
+        if ((stringConveted < inputMin || stringConveted > inputMax)) {
+            System.out.println("The '" + stringConveted + "' value is out of valid range! (Valid range: " + inputMin + " -> " + inputMax + ")");
+            stringConvertedFlag = false;
+        }
+        } while (stringConvertedFlag == false);
+        
+        //System.out.println("Pudo convertir" + stringConvertedFlag);
+        
+        return stringConveted;
     }
     
     // Add more validations, e.g.: numbers inputs with limitations
